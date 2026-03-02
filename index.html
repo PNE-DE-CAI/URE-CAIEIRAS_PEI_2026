@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PEI CAIEIRAS · 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+        }
+
+        body {
+            background-color: #f4f7fc;
+            color: #1e1e1e;
+        }
+
+        /* cores principais */
+        :root {
+            --azul-escuro: #0a2b4a;
+            --azul-claro: #4a90e2;
+            --vermelho: #d43f31;
+            --branco: #ffffff;
+            --preto: #1a1a1a;
+            --cinza-bg: #f0f4f9;
+        }
+
+        /* header */
+        .header {
+            background: linear-gradient(135deg, var(--azul-escuro) 0%, #123b6e 100%);
+            color: white;
+            padding: 1.2rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            border-bottom: 4px solid var(--vermelho);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .logo img {
+            height: 70px;
+            width: auto;
+            border-radius: 12px;
+            border: 2px solid white;
+            background: white;
+            padding: 4px;
+        }
+
+        .titulo-header h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .titulo-header p {
+            font-size: 1rem;
+            opacity: 0.9;
+            color: var(--azul-claro);
+            font-weight: 300;
+        }
+
+        /* container principal */
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        /* seções */
+        .secao {
+            margin-bottom: 3rem;
+        }
+
+        .secao-titulo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--azul-escuro);
+            border-left: 8px solid var(--vermelho);
+            padding-left: 1.2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .secao-titulo span {
+            background: var(--azul-claro);
+            color: white;
+            font-size: 1rem;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+        }
+
+        /* cards genéricos (programas) */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .card-programa {
+            background: var(--branco);
+            border-radius: 24px;
+            padding: 1.5rem 1.2rem;
+            box-shadow: 0 10px 20px rgba(0, 20, 40, 0.08);
+            transition: all 0.25s;
+            border: 1px solid rgba(74, 144, 226, 0.2);
+            border-top: 6px solid var(--azul-claro);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-programa:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px rgba(10, 43, 74, 0.15);
+            border-color: var(--azul-claro);
+        }
+
+        .card-numero {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--azul-escuro);
+            opacity: 0.15;
+            line-height: 1;
+            margin-bottom: 0.2rem;
+        }
+
+        .card-titulo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--azul-escuro);
+            margin-bottom: 0.75rem;
+        }
+
+        .card-descricao {
+            color: #2d3e5f;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+            flex: 1;
+        }
+
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--azul-claro);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            width: fit-content;
+            transition: 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .card-link:hover {
+            background: var(--azul-escuro);
+            color: white;
+            border-color: var(--azul-claro);
+        }
+
+        /* escolas – duas colunas flex */
+        .escolas-wrapper {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .escolas-col {
+            flex: 1 1 400px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 32px;
+            padding: 1.5rem;
+            backdrop-filter: blur(2px);
+        }
+
+        .col-titulo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .col-titulo.pe7 {
+            color: var(--azul-escuro);
+            border-bottom-color: var(--azul-claro);
+        }
+
+        .col-titulo.pe9 {
+            color: var(--azul-escuro);
+            border-bottom-color: var(--vermelho);
+        }
+
+        .badge-horas {
+            background: var(--azul-escuro);
+            color: white;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+        }
+
+        /* cards escola */
+        .card-escola {
+            background: var(--branco);
+            border-radius: 20px;
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 1.2rem;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.03);
+            border: 1px solid #e2ecf9;
+            transition: 0.2s;
+        }
+
+        .card-escola:hover {
+            border-color: var(--azul-claro);
+            box-shadow: 0 8px 18px rgba(74,144,226,0.15);
+        }
+
+        .escola-nome {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--azul-escuro);
+            cursor: pointer;
+            display: inline-block;
+            border-bottom: 2px dashed transparent;
+            transition: 0.2s;
+        }
+
+        .escola-nome:hover {
+            border-bottom-color: var(--vermelho);
+            color: var(--vermelho);
+        }
+
+        .escola-codigo {
+            font-size: 0.9rem;
+            color: #4f6f8f;
+            margin-left: 0.8rem;
+            background: #ecf3fa;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            display: inline-block;
+        }
+
+        .escola-supervisor {
+            margin: 0.6rem 0 0.4rem;
+            font-size: 0.95rem;
+            color: var(--preto);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .supervisor-label {
+            font-weight: 600;
+            color: var(--azul-escuro);
+        }
+
+        .upload-links {
+            margin-top: 1rem;
+            padding-top: 0.8rem;
+            border-top: 2px dotted var(--azul-claro);
+            display: none;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .upload-links a {
+            background: #e9f0f9;
+            color: var(--azul-escuro);
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            border: 1px solid var(--azul-claro);
+            transition: 0.2s;
+        }
+
+        .upload-links a:hover {
+            background: var(--azul-claro);
+            color: white;
+        }
+
+        .mostrar {
+            display: flex !important;
+        }
+
+        .footer {
+            background: var(--azul-escuro);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            font-size: 0.9rem;
+            border-top: 5px solid var(--vermelho);
+        }
+
+        .footer a {
+            color: var(--azul-claro);
+            text-decoration: none;
+        }
+
+        /* responsivo */
+        @media (max-width: 700px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .secao-titulo {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="https://i.ibb.co/0p01LzxB/logo3de.jpg" alt="Logo PEI CAIEIRAS">
+        </div>
+        <div class="titulo-header">
+            <h1>PEI · Tutoria 2026</h1>
+            <p>URE CAIEIRAS | Hub de Evidências</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- SEÇÃO PROGRAMAS / DOCUMENTOS -->
+        <section class="secao">
+            <div class="secao-titulo">
+                📋 PROGRAMAS E AÇÕES 2026
+                <span>documentos oficiais</span>
+            </div>
+            <div class="grid-cards" id="programasContainer">
+                <!-- cards gerados via JS -->
+            </div>
+        </section>
+
+        <!-- SEÇÃO ESCOLAS: 7H E 9H -->
+        <section class="secao">
+            <div class="secao-titulo">
+                🏫 ESCOLAS PEI
+                <span>supervisores e uploads</span>
+            </div>
+            <div class="escolas-wrapper">
+                <!-- coluna 7h -->
+                <div class="escolas-col">
+                    <div class="col-titulo pe7">
+                        <span>⏳ PEI 7h</span>
+                        <span class="badge-horas">7 horas</span>
+                    </div>
+                    <div id="escolas7hContainer"></div>
+                </div>
+                <!-- coluna 9h -->
+                <div class="escolas-col">
+                    <div class="col-titulo pe9">
+                        <span>🌟 PEI 9h</span>
+                        <span class="badge-horas" style="background: var(--vermelho);">9 horas</span>
+                    </div>
+                    <div id="escolas9hContainer"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <p>📍 URE CAIEIRAS · Programa Ensino Integral 2026 · Supervisores ativos</p>
+        <p>📎 Links internos baseados nos documentos do DOE | <a href="#">Tutoria 2026</a> · <a href="#">Hub Evidências</a></p>
+    </footer>
+
+    <script>
+        (function() {
+            // ---------- DADOS DOS PROGRAMAS (itens do documento) ----------
+            const programas = [
+                { numero: "00", titulo: "ACOLHIMENTO 2026", descricao: "Estratégias de acolhimento para estudantes, famílias e educadores no início do ano letivo de 2026. Integração e vínculos.", link: "https://seesp-my.sharepoint.com/:f:/r/personal/pei_educacao_sp_gov_br/Documents/01.%20COMPARTILHADO%20COM%20A%20REDE/00.%20ACOLHIMENTO%202026?csf=1&web=1&e=MUenb6" },
+                { numero: "•", titulo: "Atualizações 2026", descricao: "Planejamento anual, metas do PEI e cronograma de ações integradas para o ciclo 2026.", link: "#planejamento2026" },
+                { numero: "000", titulo: "REUNIÕES QUINZENAIS", descricao: "Calendário e pautas das reuniões de alinhamento entre supervisores, gestores e professores.", link: "#reunioes" },
+                { numero: "01", titulo: "Programa Jornada PEI", descricao: "Iniciativa 'Juntos rumo à excelência!' – formação continuada e acompanhamento de práticas pedagógicas.", link: "#jornada" },
+                { numero: "02", titulo: "PERCURSOS FORMATIVOS", descricao: "Trilhas de aprendizagem e oficinas para desenvolvimento de competências socioemocionais.", link: "#percursos" },
+                { numero: "03", titulo: "ELETIVAS", descricao: "Disciplinas eletivas do currículo, orientações para oferta e projetos interdisciplinares.", link: "#eletivas" },
+                { numero: "04", titulo: "EMA", descricao: "Estudo Monitorado e Aprofundado – materiais de apoio e roteiros para professores.", link: "#ema" },
+                { numero: "05", titulo: "ORIENTAÇÃO DE ESTUDOS PEI 2025", descricao: "Diretrizes para os momentos de orientação de estudos, com foco em autonomia e protagonismo.", link: "#orientacao" },
+                { numero: "06", titulo: "PEX PEI", descricao: "Práticas Experimentais – roteiros, laboratórios e sequências didáticas investigativas.", link: "#pex" },
+                { numero: "08", titulo: "CLUBE JUVENIL", descricao: "Estruturação e curadoria dos clubes de protagonismo juvenil nas unidades.", link: "#clube" },
+                { numero: "09", titulo: "CAF", descricao: "Centro de Apoio Familiar – ações de integração família-escola e materiais de suporte.", link: "#caf" },
+                { numero: "10", titulo: "BOLETIM COPED", descricao: "Informes pedagógicos da Coordenadoria Pedagógica – atualizações e orientações.", link: "#boletim" },
+                { numero: "15", titulo: "Diretrizes PEI Atualização 2024", descricao: "Documento norteador com as alterações e diretrizes vigentes para o Programa Ensino Integral.", link: "#diretrizes" },
+                { numero: "14", titulo: "MOCHILA VIRTUAL", descricao: "Plataforma de recursos digitais, acervo de materiais e apoio ao currículo.", link: "#mochila" },
+                { numero: "16", titulo: "VEM PRA ESCOLA DE ENSINO INTEGRAL", descricao: "Campanha de matrícula e engajamento da comunidade para o modelo PEI.", link: "#vem" },
+                { numero: "18", titulo: "RESOLUÇÕES", descricao: "Compilado de resoluções estaduais que regulamentam o Programa Ensino Integral.", link: "#resolucoes" }
+            ];
+
+            // ---------- DADOS DAS ESCOLAS (extraídos do PDF) ----------
+            // 7h
+            const escolas7h = [
+                { nome: "ARTHUR WEINGRILL", codigo: "41075", supervisor: "MARCIA MARIA VIEIRA DA MAIA", horas: "7" },
+                { nome: "CELESTINA VALENTE LENGENFELDER PROFA", codigo: "5770", supervisor: "SABRINA TEODORO RODRIGUES", horas: "7" },
+                { nome: "WALTHER WEISZFLOG", codigo: "5630", supervisor: "JESSE PEREIRA FELIPE", horas: "7" },
+                { nome: "ALBINO FIORE", codigo: "904351", supervisor: "CELSO DE JESUS NICOLETI", horas: "7" },
+                { nome: "ISAIAS LUIZ MATIAZZO", codigo: "5587", supervisor: "LELIA HARTMANN TORRES", horas: "7" },
+                { nome: "OLINDO DARTORA DR", codigo: "5599", supervisor: "ANDREIA DE OLIVEIRA", horas: "7" },
+                { nome: "DOMINGOS CAMBIAGHI PROF", codigo: "5708", supervisor: "ANDREIA DE OLIVEIRA", horas: "7" },
+                { nome: "ALADINO POLON", codigo: "921002", supervisor: "ANDREIA DE OLIVEIRA", horas: "7" },
+                { nome: "BENEDITO FAGUNDES MARQUES", codigo: "5712", supervisor: "NELSON PETZ JUNIOR", horas: "7" },
+                { nome: "WALTER RIBAS DE ANDRADE PROF EE", codigo: "5548", supervisor: "MARIA ISABEL RODRIGUES GOMES BARBOSA", horas: "7" },
+                { nome: "PEDRO GALRAO DO NASCIMENTO", codigo: "5721", supervisor: "IRAMAIA PASOTTI", horas: "7" },
+                { nome: "JOAQUIM MARQUES DA SILVA SOBRINHO TTE", codigo: "5551", supervisor: "JANAINA APARECIDA BATISTA", horas: "7" },
+                { nome: "ELCIO JOSE PEREIRA COTRIM PROF", codigo: "902330", supervisor: "JAMES ERNESTO MAZZANTI", horas: "7" }
+            ];
+
+            // 9h
+            const escolas9h = [
+                { nome: "ALFRIED THEODOR WEISZFLOG", codigo: "923138", supervisor: "CATIA DE FREITAS OLIVEIRA", horas: "9" },
+                { nome: "FRANCISCO GONCALVES VIEIRA PROF", codigo: "5605", supervisor: "AGNES REGINA DE OLIVEIRA LEITE", horas: "9" },
+                { nome: "LENITA CORREA CAMARGO PROF A", codigo: "916869", supervisor: "ANDRE CRISTIAN SOARES", horas: "9" },
+                { nome: "PEDRO LELIS DE SOUZA PREFEITO", codigo: "406806", supervisor: "JESSE PEREIRA FELIPE", horas: "9" },
+                { nome: "IRACI SARTORI VIEIRA DA SILVA PROF A", codigo: "5769", supervisor: "SABRINA TEODORO RODRIGUES", horas: "9" },
+                { nome: "AZEVEDO SOARES", codigo: "5666", supervisor: "SABRINA TEODORO RODRIGUES", horas: "9" },
+                { nome: "IVONE DOS ANJOS DA SILVA CAMPOS PROF A", codigo: "269396", supervisor: "JANAINA APARECIDA BATISTA", horas: "9" },
+                { nome: "BELEM DA SERRA", codigo: "5502", supervisor: "ROGERIO CARLOS GONCALVES", horas: "9" },
+                { nome: "CARLOS AUGUSTO DE PADUA FLEURY PROF", codigo: "908423", supervisor: "IRAMAIA PASOTTI", horas: "9" },
+                { nome: "ADAIL JARBAS DUCLOS", codigo: "48823", supervisor: "MARIA AMELIA DE ABREU", horas: "9" },
+                { nome: "BENEDITO APARECIDO TAVARES PROF", codigo: "910636", supervisor: "ANDRE CRISTIAN SOARES", horas: "9" },
+                { nome: "ARMANDO SESTINI", codigo: "908381", supervisor: "CLAUDINEIA DE ALMEIDA PESSOA SILVA", horas: "9" },
+                { nome: "JOSE ROBERTO MELCHIOR DR", codigo: "902378", supervisor: "THIAGO SOARES QUINTEIRO GOMES DA SILVA", horas: "9" },
+                { nome: "ISAURA DE MIRANDA BOTTO PROFA", codigo: "5678", supervisor: "MARIA AMELIA DE ABREU", horas: "9" }
+            ];
+
+            // renderizar programas
+            const progContainer = document.getElementById('programasContainer');
+            programas.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'card-programa';
+                card.innerHTML = `
+                    <div class="card-numero">${p.numero}</div>
+                    <div class="card-titulo">${p.titulo}</div>
+                    <div class="card-descricao">${p.descricao}</div>
+                    <a href="${p.link}" class="card-link" target="_blank">🔗 acessar documento</a>
+                `;
+                progContainer.appendChild(card);
+            });
+
+            // função para criar cards de escola com toggle
+            function criarCardEscola(escola) {
+                const card = document.createElement('div');
+                card.className = 'card-escola';
+
+                const nomeSpan = document.createElement('span');
+                nomeSpan.className = 'escola-nome';
+                nomeSpan.textContent = escola.nome;
+
+                const codSpan = document.createElement('span');
+                codSpan.className = 'escola-codigo';
+                codSpan.textContent = `Cód. ${escola.codigo}`;
+
+                const superDiv = document.createElement('div');
+                superDiv.className = 'escola-supervisor';
+                superDiv.innerHTML = `<span class="supervisor-label">🧑‍🏫 Supervisor(a):</span> ${escola.supervisor}`;
+
+                const uploadDiv = document.createElement('div');
+                uploadDiv.className = 'upload-links';
+                uploadDiv.id = `upload-${escola.codigo}-${escola.horas}`;
+                uploadDiv.innerHTML = `
+                    <a href="#upload-doc" class="btn-upload">📄 Upload de documento</a>
+                    <a href="#upload-ev" class="btn-upload">📎 Upload de evidências</a>
+                `;
+
+                card.appendChild(nomeSpan);
+                card.appendChild(codSpan);
+                card.appendChild(superDiv);
+                card.appendChild(uploadDiv);
+
+                // evento de clique no nome
+                nomeSpan.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    uploadDiv.classList.toggle('mostrar');
+                });
+
+                return card;
+            }
+
+            // preencher coluna 7h
+            const container7 = document.getElementById('escolas7hContainer');
+            escolas7h.forEach(esc => container7.appendChild(criarCardEscola(esc)));
+
+            // preencher coluna 9h
+            const container9 = document.getElementById('escolas9hContainer');
+            escolas9h.forEach(esc => container9.appendChild(criarCardEscola(esc)));
+
+            // opcional: fechar ao clicar fora (comportamento simples, mas já está funcional)
+            document.addEventListener('click', function(e) {
+                if (!e.target.classList.contains('escola-nome')) {
+                    // não faz auto-fechar para permitir multiplos abertos (intencional)
+                }
+            });
+        })();
+    </script>
+    <!-- pequeno ajuste para links simulados não recarregarem -->
+    <script>
+        document.querySelectorAll('a[href="#"]').forEach(link => {
+            link.addEventListener('click', (e) => e.preventDefault());
+        });
+    </script>
+</body>
+</html>
